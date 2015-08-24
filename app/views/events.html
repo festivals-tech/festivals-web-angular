@@ -1,0 +1,599 @@
+<div class="panel panel-default">
+  <div class="panel-heading">{{ 'Filters' | translate }}</div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <label for="nameInput" class="col-md-3 control-label">{{ 'Name' | translate }}</label>
+
+          <div class="col-sm-9">
+            <input ng-model="search.name" type="search" class="form-control" id="nameInput"
+                   placeholder="name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="descriptionInput" class="col-md-3 control-label"
+              >{{ 'Description' | translate}}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.description" type="search" class="form-control"
+                   id="descriptionInput" placeholder="description">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="placeInput" class="col-md-3 control-label"
+              >{{ 'Place' | translate}}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.place" type="search" class="form-control"
+                   id="placeInput" placeholder="place">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="categoryInput" class="col-md-3 control-label"
+              >{{ 'Category' | translate}}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.category" type="search" class="form-control"
+                   id="categoryInput" placeholder="category">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="statusInput" class="col-md-3 control-label">{{ 'Status' | translate }}</label>
+
+          <div class="col-md-9">
+            <select ng-model="search.status" ng-options="status for status in ctrl.statuses"
+                    class="form-control"
+                    id="statusInput"></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tagInput" class="col-md-3 control-label">{{ 'Tag' | translate }}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.tag" type="search" class="form-control" id="tagInput"
+                   placeholder="tag">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="authorNameInput" class="col-md-3 control-label"
+              >{{ 'Author name' | translate}}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.author_name" type="search" class="form-control"
+                   id="authorNameInput" placeholder="author name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="authorOrganizationInput" class="col-md-3 control-label"
+              >{{ 'Author organization' | translate }}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.author_organization" type="search" class="form-control"
+                   id="authorOrganizationInput" placeholder="author organization">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-3 control-label">{{ 'Date' | translate }}</label>
+
+          <div class="col-sm-4">
+            <input type="text"
+                   class="form-control"
+                   ng-model="search.duration_startAtFrom"
+                   data-date-time-picker
+                   data-language="pl"
+                   data-pick12HourFormat="false"
+                   data-use-current="false"
+                />
+          </div>
+
+          <div class="col-sm-4">
+            <input type="text"
+                   class="form-control"
+                   ng-model="search.duration_startAtTo"
+                   data-date-time-picker
+                   data-language="pl"
+                   data-pick12HourFormat="false"
+                   data-use-current="false"
+                />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-3 control-label">{{ 'Update date' | translate }}</label>
+
+          <div class="col-sm-4">
+            <input type="text"
+                   class="form-control"
+                   ng-model="search.updatedAtFrom"
+                   data-date-time-picker
+                   data-language="pl"
+                   data-pick12HourFormat="false"
+                   data-use-current="false"
+                />
+          </div>
+
+          <div class="col-sm-4">
+            <input type="text"
+                   class="form-control"
+                   ng-model="search.updatedAtTo"
+                   data-date-time-picker
+                   data-language="pl"
+                   data-pick12HourFormat="false"
+                   data-use-current="false"
+                />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="limitInput" class="col-md-3 control-label">{{ 'Limit' | translate }}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.limit" type="search" class="form-control" id="limitInput"
+                   placeholder="limit">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="offsetInput" class="col-md-3 control-label">{{ 'Offset' | translate }}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.offset" type="search" class="form-control" id="offsetInput"
+                   placeholder="offset">
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">{{ 'Sort by' | translate }}</div>
+  <div class="panel-body">
+
+    <div class="form-group">
+      <a ng-click="ctrl.toggleSort('name')">
+        {{ 'Sort by name' | translate }}
+        <span ng-show="ctrl.isSortAsc('name')" class="fa fa-caret-down"></span>
+        <span ng-show="ctrl.isSortDesc('name')" class="fa fa-caret-up"></span>
+      </a>
+    </div>
+
+    <div class="form-group">
+      <a ng-click="ctrl.toggleSort('duration.startAt')">
+        {{ 'Sort by startAt' | translate }}
+        <span ng-show="ctrl.isSortAsc('duration.startAt')" class="fa fa-caret-down"></span>
+        <span ng-show="ctrl.isSortDesc('duration.startAt')" class="fa fa-caret-up"></span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <table class="table table-bordered">
+    <tbody>
+    <tr ng-show="ctrl.collection.total"
+        ng-repeat="elem in ctrl.collection.events | eventsFilter:search  | offset: search.offset | limitTo: search.limit | orderBy:sortType:sortReverse">
+      <td>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Name' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-text="elem.name"
+               e-required
+               onbeforesave="ctrl.update(elem.id, 'name', $data)"
+                >{{ elem.name || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Description' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-textarea="elem.description"
+               e-required
+               e-rows="7"
+               e-cols="40"
+               onbeforesave="ctrl.update(elem.id, 'description', $data)"
+                >
+              <pre>{{ elem.description | limitTo: 40 }}{{elem.description.length > 40 ? '...' : ''}}</pre>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Place' | translate }}</label>
+          <div class="col-md-9">
+            <a href="#"
+               editable-text="elem.place"
+               e-required
+               e-typeahead="place as place.name for place in places | filter:{name:$viewValue}"
+               onbeforesave="ctrl.update(elem.id, 'place', $data)"
+                >{{ elem.place.name || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Category' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-text="elem.category"
+               e-required
+               e-typeahead="category as category.name for category in categories | filter:{name:$viewValue}"
+               onbeforesave="ctrl.update(elem.id, 'category', $data)"
+                >{{ elem.category.name || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Status' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-select="elem.status"
+               e-required
+               e-ng-options="status for status in ctrl.statuses"
+               onbeforesave="ctrl.update(elem.id, 'status', $data)"
+                >{{ elem.status || 'unknown'}}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Tag' | translate }}</label>
+
+          <div class="col-md-9">
+            <tags-input ng-model="elem.tags"
+                        on-tag-added="ctrl.updateTag(elem.id, $tag)"
+                        on-tag-removed="ctrl.updateTag(elem.id, $tag)"
+                        minLength="1"
+                />
+
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Start at' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               e-required
+               editable-bsdate="elem.duration.startAt"
+               onbeforesave="ctrl.update(elem.id, 'duration.startAt', $data)"
+               onshow="openPicker()"
+               onhide="closePicker()"
+               e-format="dd-MM-yyyy"
+               e-is-open="picker.opened"
+               e-current-text="{{ 'Today' | translate }}"
+               e-clear-text="{{ 'Clear' | translate }}"
+               e-close-text="{{ 'Done' | translate }}"
+               e-datepicker-popup="dd-MM-yyyy"
+                >{{ (elem.duration.startAt | date:"dd-MM-yyyy") || 'unknown' }}</a>
+            <span>time</span>
+            <a href="#"
+               e-required
+               editable-bstime="elem.duration.startAt"
+               e-show-meridian="false"
+               onbeforesave="ctrl.update(elem.id, 'duration.startAt', $data)"
+               e-minute-step="10"
+                >{{ (elem.duration.startAt | date:"HH:mm") || 'empty' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Finish at' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               e-required
+               editable-bsdate="elem.duration.finishAt"
+               onbeforesave="ctrl.update(elem.id, 'duration.finishAt', $data)"
+               onshow="openPicker()"
+               onhide="closePicker()"
+               e-is-open="picker.opened"
+               e-current-text="{{ 'Today' | translate }}"
+               e-clear-text="{{ 'Clear' | translate }}"
+               e-close-text="{{ 'Done' | translate }}"
+               e-format="dd-MM-yyyy"
+               e-datepicker-popup="dd-MM-yyyy"
+                >{{ (elem.duration.finishAt | date:"dd-MM-yyyy") || 'unknown' }}</a>
+            <span>time</span>
+            <a href="#"
+               e-required
+               editable-bstime="elem.duration.finishAt"
+               e-show-meridian="false"
+               onbeforesave="ctrl.update(elem.id, 'duration.finishAt', $data)"
+               e-minute-step="10"
+                >{{ (elem.duration.finishAt | date:"HH:mm") || 'empty' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Author name' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               e-required
+               editable-text="elem.authors[0].name"
+               onbeforesave="ctrl.update(elem.id, 'authors[0].name', $data)"
+                >{{elem.authors[0].name || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Author organization' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               e-required
+               editable-text="elem.authors[0].organization"
+               onbeforesave="ctrl.update(elem.id, 'authors[0].organization', $data)"
+                >{{elem.authors[0].organization || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Image' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-url="elem.mainImage.large"
+               onbeforesave="ctrl.update(elem.id, 'mainImage.large', $data)"
+                >{{elem.mainImage.large || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Image preview' | translate }}</label>
+
+          <div class="col-md-9">
+            <img class="img-responsive img-thumbnail" ng-show="elem.mainImage.large"
+                 ng-src="{{elem.mainImage.large}}"
+                 alt="Image"/>
+          </div>
+        </div>
+
+      </td>
+      <td>
+        <div class="buttons">
+          <button class="btn btn-danger"
+                  ng-show="elem.id"
+                  ng-click="ctrl.remove(elem.id)"
+              >{{ 'remove' | translate }}
+          </button>
+          <button class="btn btn-danger"
+                  ng-show="elem.id"
+                  ng-click="ctrl.duplicate(elem.id);editableForm.$show()"
+              >{{ 'duplicate' | translate }}
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <td>
+
+      <nav>
+        <div class="text-center">
+
+          <ul class="pagination">
+            <li>
+              <a ng-click="ctrl.prevPage()" aria-label="Previous"
+                 ng-class="ctrl.prevPageDisabled()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li ng-repeat="n in ctrl.range()">
+              <a ng-click="ctrl.setPage(n)" ng-class="{active: n == ctrl.currentPage}">{{n+1}}</a>
+            </li>
+            <li>
+              <a ng-click="ctrl.nextPage()" aria-label="Next" ng-class="ctrl.nextPageDisabled()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    </td>
+    </tfoot>
+
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">{{ 'Add new event' | translate }}</div>
+  <div class="panel-body">
+    <div class="btn-form">
+      <form editable-form
+            name="editableForm"
+            onaftersave="ctrl.save()"
+          >
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Name' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="event.name"
+                  name="name"
+                  e-name="name"
+                  e-required
+                  e-placeholder="event name"
+                >{{ event.name || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">{{ 'Description' | translate }}</label>
+            <span class="col-md-9"
+                  editable-textarea="event.description"
+                  e-name="description"
+                  e-rows="7"
+                  e-cols="40"
+                  e-required
+                  e-placeholder="event description"
+                ><pre>{{ elem.description || 'no description' }}</pre></span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Place' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="event.place.name"
+                  name="place.name"
+                  e-name="place.name"
+                  e-required
+                  e-placeholder="event place name"
+                >{{ event.place.name || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Category' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="event.category.name"
+                  name="category.name"
+                  e-name="category.name"
+                  e-required
+                  e-placeholder="event category name"
+                >{{ event.category.name || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">{{ 'Status' | translate }}</label>
+            <span class="col-md-9"
+                  editable-select="event.status"
+                  e-name="status"
+                  e-required
+                  e-ng-options="status for status in ctrl.statuses"
+                  e-placeholder="event status"
+                >{{ event.status || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Tag' | translate }}</label>
+          <tags-input class="col-md-9"
+                      ng-model="event.tags"
+                      minLength="1"
+              />
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Start at date' | translate }}</label>
+              <span class="col-md-9"
+                    editable-bsdate="event.duration.startAt"
+                    e-name="duration.startAt.date"
+                    e-required
+                    e-datepicker-popup="dd-MM-yyyy"
+                    datepicker-append-to-body=true
+                    e-init-date="11-11-2015"
+                    e-current-text="{{ 'Today' | translate }}"
+                    e-clear-text="{{ 'Clear' | translate }}"
+                    e-close-text="{{ 'Done' | translate }}"
+                  >{{ (event.duration.startAt | date:"dd-MM-yyyy") || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Start at time' | translate }}</label>
+              <span class="col-md-9"
+                    editable-bstime="event.duration.startAt"
+                    e-name="duration.startAt.time"
+                    e-required
+                    e-show-meridian="false"
+                    e-minute-step="10"
+                  >{{ (event.duration.startAt | date:"HH:mm") || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Finish at date' | translate }}</label>
+                   <span class="col-md-9"
+                         editable-bsdate="event.duration.finishAt"
+                         e-name="duration.finishAt.date"
+                         e-required
+                         e-datepicker-popup="dd-MM-yyyy"
+                         datepicker-append-to-body=true
+                         e-init-date="11-11-2015"
+                         e-current-text="{{ 'Today' | translate }}"
+                         e-clear-text="{{ 'Clear' | translate }}"
+                         e-close-text="{{ 'Done' | translate }}"
+                       >{{ (event.duration.finishAt | date:"dd-MM-yyyy") || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Finish at time' | translate }}</label>
+                   <span class="col-md-9"
+                         editable-bstime="event.duration.finishAt"
+                         e-name="duration.finishAt.time"
+                         e-required
+                         e-show-meridian="false"
+                         e-minute-step="10"
+                       >{{ (event.duration.finishAt | date:"HH:mm") || 'unknown' }}</span>
+        </div>
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Author name' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="event.authors[0].name"
+                  name="author_name"
+                  e-name="author_name"
+                  e-required
+                  e-placeholder="author name"
+                >{{ event.authors[0].name || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Author organization' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="event.authors[0].organization"
+                  name="author_organization"
+                  e-name="author_organization"
+                  e-required
+                  e-placeholder="author organization"
+                >{{ event.authors[0].organization || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 control-label">{{ 'Image' | translate }}</label>
+            <span class="col-md-9"
+                  editable-url="event.mainImage.large"
+                  e-name="mainImage.large"
+                  e-placeholder="event main image"
+                >{{ event.mainImage.large || 'unknown' }}</span>
+            <span class="col-md-9">
+              <img
+                  ng-show="event.mainImage.large"
+                  ng-src="{{event.mainImage.large}}"
+                  alt="Image"/></span>
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
+                  ng-show="!editableForm.$visible"
+              >{{ 'Edit' | translate }}
+          </button>
+          <span ng-show="editableForm.$visible">
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-disabled="editableForm.$waiting"
+                >{{ 'Save' | translate }}
+            </button>
+            <button type="button"
+                    class="btn btn-default"
+                    ng-disabled="editableForm.$waiting"
+                    ng-click="ctrl.reset();editableForm.$cancel()"
+                >{{ 'Cancel' | translate }}
+            </button>
+          </span>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

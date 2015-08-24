@@ -1,0 +1,282 @@
+<div class="panel panel-default">
+  <div class="panel-heading">{{ 'Filters' | translate }}</div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <label for="nameInput" class="col-md-3 control-label">{{ 'Name' | translate }}</label>
+
+          <div class="col-sm-9">
+            <input ng-model="search.name" type="search" class="form-control" id="nameInput"
+                   placeholder="name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-3 control-label">{{ 'Update date' | translate }}</label>
+
+          <div class="col-sm-4">
+            <input type="text"
+                   class="form-control"
+                   ng-model="search.updatedAtFrom"
+                   data-date-time-picker
+                   data-language="pl"
+                   data-pick12HourFormat="false"
+                   data-use-current="false"
+                />
+          </div>
+
+          <div class="col-sm-4">
+            <input type="text"
+                   class="form-control"
+                   ng-model="search.updatedAtTo"
+                   data-date-time-picker
+                   data-language="pl"
+                   data-pick12HourFormat="false"
+                   data-use-current="false"
+                />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="limitInput" class="col-md-3 control-label">{{ 'Limit' | translate }}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.limit" type="search" class="form-control" id="limitInput"
+                   placeholder="limit">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="offsetInput" class="col-md-3 control-label">{{ 'Offset' | translate }}</label>
+
+          <div class="col-md-9">
+            <input ng-model="search.offset" type="search" class="form-control" id="offsetInput"
+                   placeholder="offset">
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">{{ 'Sort by' | translate }}</div>
+  <div class="panel-body">
+
+    <div class="form-group">
+      <a ng-click="ctrl.toggleSort('name')">
+        {{ 'Sort by name' | translate }}
+        <span ng-show="ctrl.isSortAsc('name')" class="fa fa-caret-down"></span>
+        <span ng-show="ctrl.isSortDesc('name')" class="fa fa-caret-up"></span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <table class="table table-bordered">
+    <tbody>
+    <tr ng-show="ctrl.collection.total"
+        ng-repeat="elem in ctrl.collection.places | placesFilter:search  | offset: search.offset | limitTo: search.limit | orderBy:sortType:sortReverse">
+      <td>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Name' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-text="elem.name"
+               e-required
+               onbeforesave="ctrl.update(elem.id, 'name', $data)"
+                >{{ elem.name || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Parent place' | translate }}</label>
+          <div class="col-md-9">
+            <a href="#"
+               editable-text="elem.parent"
+               e-typeahead="parent as parent.name for parent in parents | filter:{name:$viewValue}"
+               onbeforesave="ctrl.update(elem.id, 'parent', $data)"
+                >{{ elem.parent.name || 'unknown' }}</a>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Coordinates' | translate }}</label>
+
+          <div class="col-md-4">{{ 'Lat' | translate }}
+            <a href="#"
+               editable-text="elem.coordinates.lat"
+               onbeforesave="ctrl.update(elem.id, 'coordinates.lat', $data)"
+                >{{ elem.coordinates.lat || 'unknown' }}</a>
+          </div>
+
+          <div class="col-md-4">{{ 'Lon' | translate }}
+            <a href="#"
+               editable-text="elem.coordinates.lon"
+               onbeforesave="ctrl.update(elem.id, 'coordinates.lon', $data)"
+                >{{ elem.coordinates.lon || 'unknown' }}</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-md-3">{{ 'Opening times' | translate }}</label>
+
+          <div class="col-md-9">
+            <a href="#"
+               editable-bstime="elem.openingTimes[0].startAt"
+               e-show-meridian="false"
+               e-minute-step="10"
+               onbeforesave="ctrl.update(elem.id, 'openingTimes[0].startAt', $data)"
+                >{{ (elem.openingTimes[0].startAt | date:"HH:mm") || 'unknown' }}</a>
+            <span>{{ 'To' | translate }}</span>
+            <a href="#"
+               editable-bstime="elem.openingTimes[0].finishAt"
+               e-show-meridian="false"
+               e-minute-step="10"
+               onbeforesave="ctrl.update(elem.id, 'openingTimes[0].finishAt', $data)"
+                >{{ (elem.openingTimes[0].finishAt | date:"HH:mm") || 'unknown' }}</a>
+          </div>
+        </div>
+
+      </td>
+      <td>
+        <div class="buttons">
+          <button class="btn btn-danger"
+                  ng-show="elem.id"
+                  ng-click="ctrl.remove(elem.id)"
+              >{{ 'remove' | translate }}
+          </button>
+          <button class="btn btn-danger"
+                  ng-show="elem.id"
+                  ng-click="ctrl.duplicate(elem.id);editableForm.$show()"
+              >{{ 'duplicate' | translate }}
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <td>
+
+      <nav>
+        <div class="text-center">
+
+          <ul class="pagination">
+            <li>
+              <a ng-click="ctrl.prevPage()" aria-label="Previous"
+                 ng-class="ctrl.prevPageDisabled()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li ng-repeat="n in ctrl.range()">
+              <a ng-click="ctrl.setPage(n)" ng-class="{active: n == ctrl.currentPage}">{{n+1}}</a>
+            </li>
+            <li>
+              <a ng-click="ctrl.nextPage()" aria-label="Next" ng-class="ctrl.nextPageDisabled()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    </td>
+    </tfoot>
+
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">{{ 'Add new place' | translate }}</div>
+  <div class="panel-body">
+    <div class="btn-form">
+      <form editable-form
+            name="editableForm"
+            onaftersave="ctrl.save()"
+          >
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Name' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="place.name"
+                  name="name"
+                  e-name="name"
+                  e-required
+                  e-placeholder="place name"
+                >{{ place.name || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Parent place' | translate }}</label>
+            <span class="col-md-9"
+                  editable-text="place.parent"
+                  e-typeahead="parent as parent.name for parent in parents | filter:{name:$viewValue}"
+                  name="parent"
+                  e-name="parent"
+                  e-placeholder="place parent"
+                >{{ place.parent.name || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="control-label col-md-3">{{ 'Coordinates' | translate }}</label>
+            <span class="col-md-4"
+                  editable-text="place.coordinates.lat"
+                  name="coordinates.lat"
+                  e-name="coordinates.lat"
+                  e-placeholder="coordinates lat"
+                >{{ place.coordinates.lat || 'unknown' }}</span>
+          <span class="col-md-4"
+                  editable-text="place.coordinates.lon"
+                  name="coordinates.lon"
+                  e-name="coordinates.lon"
+                  e-placeholder="coordinates lon"
+                >{{ place.coordinates.lon || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">{{ 'Opening times' | translate }}</label>
+          <span class="col-md-3"
+                editable-bstime="place.openingTimes[0].startAt"
+                e-name="openingTimes[0].startAt"
+                e-show-meridian="false"
+                e-minute-step="10"
+              >{{ (place.openingTimes[0].startAt | date:"HH:mm") || 'unknown' }}</span>
+          <span class="col-md-3">{{ 'To' | translate }}</span>
+          <span class="col-md-3"
+                editable-bstime="place.openingTimes[0].finishAt"
+                e-name="openingTimes[0].finishAt"
+                e-show-meridian="false"
+                e-minute-step="10"
+              >{{ (place.openingTimes[0].finishAt | date:"HH:mm") || 'unknown' }}</span>
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
+                  ng-show="!editableForm.$visible"
+              >{{ 'Edit' | translate }}
+          </button>
+          <span ng-show="editableForm.$visible">
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-disabled="editableForm.$waiting"
+                >{{ 'Save' | translate }}
+            </button>
+            <button type="button"
+                    class="btn btn-default"
+                    ng-disabled="editableForm.$waiting"
+                    ng-click="ctrl.reset();editableForm.$cancel()"
+                >{{ 'Cancel' | translate }}
+            </button>
+          </span>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
