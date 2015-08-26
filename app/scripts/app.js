@@ -49,8 +49,8 @@ angular
   //    profileUrl: 'https://desolate-temple-8751.herokuapp.com/userinfo'
   //  }
   //})
-  //.value('apiUrl', 'https://festivals.tech/api')
-  .value('apiUrl', 'http://localhost:3000/api')
+  .value('apiUrl', 'https://festivals.tech/api')
+  //.value('apiUrl', 'http://localhost:3000/api')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
