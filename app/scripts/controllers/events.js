@@ -163,8 +163,9 @@ angular.module('festivalsWebApp')
       console.log('save', $scope.event);
 
       var data = angular.copy($scope.event);
+      data.images = [];
 
-      if (data.hasOwnProperty('tags')) {
+      if (data.hasOwnProperty('tags') && data.tags) {
         console.log('tag for ' + data);
 
         var tags = data.tags.map(function (tag) {
@@ -174,7 +175,7 @@ angular.module('festivalsWebApp')
         data.tags = tags;
       }
 
-      if (data.hasOwnProperty('mainImage')) {
+      if (data.hasOwnProperty('mainImage') && data.mainImage && data.mainImage.large) {
         var image = {
           url: data.mainImage.large
         };
@@ -182,9 +183,9 @@ angular.module('festivalsWebApp')
         data.images = [
           image
         ];
-
-        delete data.mainImage;
       }
+
+      delete data.mainImage;
 
       if (data.hasOwnProperty('category')) {
         data.category = data.category.id;
@@ -225,13 +226,13 @@ angular.module('festivalsWebApp')
 
     this.reset = function () {
       console.log('reset');
-      $scope.event = $scope.emptyEvent;
+      $scope.event = angular.copy($scope.emptyEvent);
     };
 
 
     //sorting
     $scope.sortType = 'duration.startAt';
-    $scope.sortReverse = true;
+    $scope.sortReverse = false;
 
     this.toggleSort = function toggleSort(type) {
       $scope.sortType = type;

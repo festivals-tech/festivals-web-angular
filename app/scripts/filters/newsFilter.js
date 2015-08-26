@@ -11,11 +11,13 @@
 angular.module('festivalsWebApp')
   .filter('newsFilter', function () {
     return function (items, search) {
-      console.log(search);
+      //console.log(search);
 
       search = search || {};
       search.name = search.name || '';
       search.description = search.description || '';
+      search.author_name = search.author_name || '';
+      search.author_organization = search.author_organization || '';
       search.updatedAtFrom = search.updatedAtFrom || '';
       search.updatedAtTo = search.updatedAtTo || '';
 
@@ -34,6 +36,23 @@ angular.module('festivalsWebApp')
               valid = false;
             }
         }
+
+        angular.forEach(object.authors, function (author, key2) {
+          //console.log('second: ', location, key2);
+
+          switch (true) {
+
+            case !!search.author_name:
+
+              if (!author.name || author.name.indexOfInsensitive(search.author_name) === -1) {
+                valid = false;
+              }
+            case !!search.author_organization:
+              if (!author.organization || author.organization.indexOfInsensitive(search.author_organization) === -1) {
+                valid = false;
+              }
+          }
+        });
 
         if (object.updatedAt) {
           valid = valid && checkDateRange(object.updatedAt, search.updatedAtFrom, search.updatedAtTo);

@@ -157,10 +157,9 @@
 <div class="panel panel-default">
   <table class="table table-bordered">
     <tbody>
-    <!--<tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.news | newsFilter:search  | offset: search.offset | limitTo: search.limit | orderBy:sortType:sortReverse">-->
+
     <tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.news | limitTo: search.limit  | offset: search.offset ">
+        ng-repeat="elem in ctrl.collection.news | newsFilter:search | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
       <td>
         <!--<editable-text-row elem="elem.name" elem-name="name" required></editable-text-row>-->
 

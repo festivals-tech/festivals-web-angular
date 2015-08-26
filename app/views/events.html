@@ -183,7 +183,7 @@
   <table class="table table-bordered">
     <tbody>
     <tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.events | eventsFilter:search  | offset: search.offset | limitTo: search.limit | orderBy:sortType:sortReverse">
+        ng-repeat="elem in ctrl.collection.events | eventsFilter:search | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit ">
       <td>
 
         <div class="row">
@@ -272,6 +272,7 @@
             <a href="#"
                e-required
                editable-bsdate="elem.duration.startAt"
+               e-init-date="11-11-2015"
                onbeforesave="ctrl.update(elem.id, 'duration.startAt', $data)"
                onshow="openPicker()"
                onhide="closePicker()"
@@ -286,6 +287,7 @@
             <a href="#"
                e-required
                editable-bstime="elem.duration.startAt"
+               e-mousewheel="false"
                e-show-meridian="false"
                onbeforesave="ctrl.update(elem.id, 'duration.startAt', $data)"
                e-minute-step="10"
@@ -300,6 +302,7 @@
             <a href="#"
                e-required
                editable-bsdate="elem.duration.finishAt"
+               e-init-date="11-11-2015"
                onbeforesave="ctrl.update(elem.id, 'duration.finishAt', $data)"
                onshow="openPicker()"
                onhide="closePicker()"
@@ -314,6 +317,7 @@
             <a href="#"
                e-required
                editable-bstime="elem.duration.finishAt"
+               e-mousewheel="false"
                e-show-meridian="false"
                onbeforesave="ctrl.update(elem.id, 'duration.finishAt', $data)"
                e-minute-step="10"
@@ -448,10 +452,11 @@
         <div class="form-group row">
           <label class="control-label col-md-3">{{ 'Place' | translate }}</label>
             <span class="col-md-9"
-                  editable-text="event.place.name"
-                  name="place.name"
-                  e-name="place.name"
+                  editable-text="event.place"
+                  name="place"
+                  e-name="place"
                   e-required
+                  e-typeahead="place as place.name for place in places | filter:{name:$viewValue}"
                   e-placeholder="event place name"
                 >{{ event.place.name || 'unknown' }}</span>
         </div>
@@ -459,10 +464,11 @@
         <div class="form-group row">
           <label class="control-label col-md-3">{{ 'Category' | translate }}</label>
             <span class="col-md-9"
-                  editable-text="event.category.name"
-                  name="category.name"
-                  e-name="category.name"
+                  editable-text="event.category"
+                  name="category"
+                  e-name="category"
                   e-required
+                  e-typeahead="category as category.name for category in categories | filter:{name:$viewValue}"
                   e-placeholder="event category name"
                 >{{ event.category.name || 'unknown' }}</span>
         </div>
@@ -490,11 +496,11 @@
           <label class="control-label col-md-3">{{ 'Start at date' | translate }}</label>
               <span class="col-md-9"
                     editable-bsdate="event.duration.startAt"
+                    e-init-date="11-11-2015"
                     e-name="duration.startAt.date"
                     e-required
                     e-datepicker-popup="dd-MM-yyyy"
                     datepicker-append-to-body=true
-                    e-init-date="11-11-2015"
                     e-current-text="{{ 'Today' | translate }}"
                     e-clear-text="{{ 'Clear' | translate }}"
                     e-close-text="{{ 'Done' | translate }}"
@@ -509,6 +515,7 @@
                     e-required
                     e-show-meridian="false"
                     e-minute-step="10"
+                    e-mousewheel="false"
                   >{{ (event.duration.startAt | date:"HH:mm") || 'unknown' }}</span>
         </div>
 
@@ -516,11 +523,11 @@
           <label class="control-label col-md-3">{{ 'Finish at date' | translate }}</label>
                    <span class="col-md-9"
                          editable-bsdate="event.duration.finishAt"
+                         e-init-date="11-11-2015"
                          e-name="duration.finishAt.date"
                          e-required
                          e-datepicker-popup="dd-MM-yyyy"
                          datepicker-append-to-body=true
-                         e-init-date="11-11-2015"
                          e-current-text="{{ 'Today' | translate }}"
                          e-clear-text="{{ 'Clear' | translate }}"
                          e-close-text="{{ 'Done' | translate }}"
@@ -535,6 +542,7 @@
                          e-required
                          e-show-meridian="false"
                          e-minute-step="10"
+                         e-mousewheel="false"
                        >{{ (event.duration.finishAt | date:"HH:mm") || 'unknown' }}</span>
         </div>
         <div class="form-group row">
@@ -543,7 +551,6 @@
                   editable-text="event.authors[0].name"
                   name="author_name"
                   e-name="author_name"
-                  e-required
                   e-placeholder="author name"
                 >{{ event.authors[0].name || 'unknown' }}</span>
         </div>
@@ -554,7 +561,6 @@
                   editable-text="event.authors[0].organization"
                   name="author_organization"
                   e-name="author_organization"
-                  e-required
                   e-placeholder="author organization"
                 >{{ event.authors[0].organization || 'unknown' }}</span>
         </div>

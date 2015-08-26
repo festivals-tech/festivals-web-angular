@@ -208,7 +208,7 @@
   <table class="table table-bordered">
     <tbody>
     <tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.festivals | festivalsFilter:search  | offset: search.offset | limitTo: search.limit | orderBy:sortType:sortReverse">
+        ng-repeat="elem in ctrl.collection.festivals | festivalsFilter:search | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
       <td>
         <!--<editable-text-row elem="elem.name" elem-name="name" required></editable-text-row>-->
 
@@ -285,6 +285,7 @@
             <a href="#"
                e-required
                editable-bsdate="elem.duration.startAt"
+               e-init-date="11-11-2015"
                onbeforesave="ctrl.update(elem.id, 'duration.startAt', $data)"
                onshow="openPicker()"
                onhide="closePicker()"
@@ -299,6 +300,7 @@
             <a href="#"
                e-required
                editable-bstime="elem.duration.startAt"
+               e-mousewheel="false"
                e-show-meridian="false"
                onbeforesave="ctrl.update(elem.id, 'duration.startAt', $data)"
                e-minute-step="10"
@@ -313,6 +315,7 @@
             <a href="#"
                e-required
                editable-bsdate="elem.duration.finishAt"
+               e-init-date="11-11-2015"
                onbeforesave="ctrl.update(elem.id, 'duration.finishAt', $data)"
                onshow="openPicker()"
                onhide="closePicker()"
@@ -327,6 +330,7 @@
             <a href="#"
                e-required
                editable-bstime="elem.duration.finishAt"
+               e-mousewheel="false"
                e-show-meridian="false"
                onbeforesave="ctrl.update(elem.id, 'duration.finishAt', $data)"
                e-minute-step="10"
@@ -413,6 +417,7 @@
           <div class="col-md-9">
             <a href="#"
                editable-bstime="elem.locations[0].openingTimes[0].startAt"
+               e-mousewheel="false"
                e-show-meridian="false"
                e-minute-step="10"
                onbeforesave="ctrl.update(elem.id, 'locations[0].openingTimes[0].startAt', $data)"
@@ -420,6 +425,7 @@
             <span>{{ 'To' | translate }}</span>
             <a href="#"
                editable-bstime="elem.locations[0].openingTimes[0].finishAt"
+               e-mousewheel="false"
                e-show-meridian="false"
                e-minute-step="10"
                onbeforesave="ctrl.update(elem.id, 'locations[0].openingTimes[0].finishAt', $data)"
@@ -570,11 +576,11 @@
           <label class="col-md-3 control-label">{{ 'Start at date' | translate }}</label>
             <span class="col-md-8"
                   editable-bsdate="festival.duration.startAt"
+                  e-init-date="11-11-2015"
                   e-name="duration.startAt.date"
                   e-required
                   e-datepicker-popup="dd-MM-yyyy"
                   datepicker-append-to-body=true
-                  e-init-date="11-11-2015"
                   e-current-text="{{ 'Today' | translate }}"
                   e-clear-text="{{ 'Clear' | translate }}"
                   e-close-text="{{ 'Done' | translate }}"
@@ -585,6 +591,7 @@
           <label class="col-md-3 control-label">{{ 'Start at time' | translate }}</label>
             <span class="col-md-8"
                   editable-bstime="festival.duration.startAt"
+                  e-mousewheel="false"
                   e-name="duration.startAt.time"
                   e-required
                   e-show-meridian="false"
@@ -596,11 +603,11 @@
           <label class="col-md-3 control-label">{{ 'Finish at date' | translate }}</label>
             <span class="col-md-8"
                   editable-bsdate="festival.duration.finishAt"
+                  e-init-date="11-11-2015"
                   e-name="duration.finishAt.date"
                   e-required
                   e-datepicker-popup="dd-MM-yyyy"
                   datepicker-append-to-body=true
-                  e-init-date="11-11-2015"
                   e-current-text="{{ 'Today' | translate }}"
                   e-clear-text="{{ 'Clear' | translate }}"
                   e-close-text="{{ 'Done' | translate }}"
@@ -611,6 +618,7 @@
           <label class="col-md-3 control-label">{{ 'Finish at time' | translate }}</label>
             <span class="col-md-8"
                   editable-bstime="festival.duration.finishAt"
+                  e-mousewheel="false"
                   e-name="duration.finishAt.time"
                   e-required
                   e-show-meridian="false"
@@ -683,6 +691,7 @@
           <label class="col-md-3 control-label">{{ 'Location opening times' | translate }}</label>
           <span class="col-md-3"
                 editable-bstime="festival.locations[0].openingTimes[0].startAt"
+                e-mousewheel="false"
                 e-name="locations[0].openingTimes[0].startAt"
                 e-show-meridian="false"
                 e-minute-step="10"
@@ -690,6 +699,7 @@
           <span class="col-md-3">{{ 'To' | translate }}</span>
           <span class="col-md-3"
                 editable-bstime="festival.locations[0].openingTimes[0].finishAt"
+                e-mousewheel="false"
                 e-name="locations[0].openingTimes[0].finishAt"
                 e-show-meridian="false"
                 e-minute-step="10"

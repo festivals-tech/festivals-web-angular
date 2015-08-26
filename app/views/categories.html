@@ -80,7 +80,7 @@
   <table class="table table-bordered">
     <tbody>
     <tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.categories | categoriesFilter:search  | offset: search.offset | limitTo: search.limit | orderBy:sortType:sortReverse">
+        ng-repeat="elem in ctrl.collection.categories | categoriesFilter:search | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
       <td>
 
         <div class="row">

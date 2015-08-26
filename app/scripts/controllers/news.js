@@ -76,8 +76,6 @@ angular.module('festivalsWebApp')
       return api.updateNews(id, data);
     };
 
-    $scope.sortReverse = true;
-
     this.remove = function (id) {
       console.log('remove', id);
 
@@ -169,11 +167,13 @@ angular.module('festivalsWebApp')
 
     this.reset = function () {
       console.log('reset');
-      $scope.news = $scope.emptyNews;
+      $scope.news = angular.copy($scope.emptyNews);
     };
 
     //sorting
-    $scope.sortType = 'createdAt';
+
+    $scope.sortReverse = true;
+    $scope.sortType = 'publishedAt';
 
     this.toggleSort = function toggleSort(type) {
       $scope.sortType = type;
