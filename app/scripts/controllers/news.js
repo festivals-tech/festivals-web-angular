@@ -90,7 +90,7 @@ angular.module('festivalsWebApp')
       }
     };
 
-    self.emptyNews = {
+    $scope.emptyNews = {
       name: '',
       description: '',
       tags: '',
@@ -105,12 +105,12 @@ angular.module('festivalsWebApp')
       }
     };
 
-    self.news = self.news || self.emptyNews;
+    $scope.news = $scope.news || $scope.emptyNews;
 
     this.save = function () {
-      console.log('save', self.news);
+      console.log('save', $scope.news);
 
-      var data = angular.copy(self.news);
+      var data = angular.copy($scope.news);
 
       if (data.hasOwnProperty('tags')) {
         console.log('tag for ' + data);
@@ -162,12 +162,12 @@ angular.module('festivalsWebApp')
 
       delete news.id;
       delete news['$$hashKey'];
-      self.news = angular.copy(news);
+      $scope.news = angular.copy(news);
     };
 
     this.reset = function () {
       console.log('reset');
-      self.news = angular.copy(self.emptyNews);
+      $scope.news = angular.copy($scope.emptyNews);
     };
 
     //sorting
