@@ -11,7 +11,8 @@ angular.module('festivalsWebApp')
   .controller('NewsCtrl', function ($scope, $timeout, collection, api) {
     var self = this;
 
-    this.collection = collection;
+    console.log(collection);
+    this.collection = collection || [];
     this.statuses = ['', 'CREATED', 'PUBLISHED', 'CANCELED'];
 
     function setProp(path, newValue) {
@@ -46,7 +47,7 @@ angular.module('festivalsWebApp')
         return;
       }
 
-      var el = collection.news.filter(function (el) {
+      var el = self.collection.news.filter(function (el) {
         return el.id === id;
       });
 
@@ -81,7 +82,7 @@ angular.module('festivalsWebApp')
 
       //remove real elem
       if (id) {
-        collection.news = collection.news.filter(function (elem) {
+        self.collection.news = self.collection.news.filter(function (elem) {
           return elem.id !== id;
         });
 
@@ -141,7 +142,7 @@ angular.module('festivalsWebApp')
       deferred.then(function (value) {
         console.log('on save', value);
         self.reset();
-        collection.news.push(value);
+        self.collection.news.push(value);
       });
 
       return deferred;
@@ -150,7 +151,7 @@ angular.module('festivalsWebApp')
     this.duplicate = function (id) {
       console.log('duplicate', id);
 
-      var el = collection.news.filter(function (el) {
+      var el = self.collection.news.filter(function (el) {
         return el.id === id;
       });
 
@@ -221,7 +222,7 @@ angular.module('festivalsWebApp')
         return 0;
       }
 
-      return Math.ceil(collection.news.length / $scope.search.limit) - 1;
+      return Math.ceil(self.collection.news.length / $scope.search.limit) - 1;
     };
 
     this.range = function () {

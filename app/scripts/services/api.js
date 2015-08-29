@@ -8,7 +8,7 @@
  * Service in the festivalsWebApp.
  */
 angular.module('festivalsWebApp')
-  .service('api', function ($q, apiUrl, AccessToken, FestivalsApi) {
+  .service('api', function ($q, apiUrl, FestivalsApi) {
 
     console.log('init api');
 
@@ -18,20 +18,9 @@ angular.module('festivalsWebApp')
 
     var festivalsApiDeferred = new FestivalsApi(options);
 
-    var setUpToken = function setUpToken(AccessToken) {
-
-      AccessToken.set();
-
-      if (AccessToken.get()) {
-        festivalsApiDeferred.setToken(AccessToken.get().access_token);
-      }
-
-    };
-
     this.getFestivals = function getFestivals() {
       console.log('getFestivals');
 
-      setUpToken(AccessToken);
 
       var query = {
         //name: 'festival-name'
@@ -43,7 +32,6 @@ angular.module('festivalsWebApp')
     this.deleteFestival = function deleteFestival(id) {
       console.log('deleteFestival', id);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id
@@ -55,7 +43,6 @@ angular.module('festivalsWebApp')
     this.updateFestival = function updateFestival(id, data) {
       console.log('updateFestival', id, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         id: id,
@@ -68,7 +55,6 @@ angular.module('festivalsWebApp')
     this.createFestival = function createFestival(data) {
       console.log('createFestival', data);
 
-      setUpToken(AccessToken);
 
       var params = {
         festivalRequest: data
@@ -80,7 +66,6 @@ angular.module('festivalsWebApp')
     this.getNewsCollection = function getNewsCollection() {
       console.log('getNewsCollection');
 
-      setUpToken(AccessToken);
 
       var query = {
         //name: 'name'
@@ -92,7 +77,6 @@ angular.module('festivalsWebApp')
     this.updateNews = function updateNews(id, data) {
       console.log('updateNews', id, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         'news.id': id,
@@ -105,7 +89,6 @@ angular.module('festivalsWebApp')
     this.createNews = function createNews(data) {
       console.log('createNews', data);
 
-      setUpToken(AccessToken);
 
       var params = {
         newsRequest: data
@@ -117,7 +100,6 @@ angular.module('festivalsWebApp')
     this.getFestivalEvents = function getFestivalEvents(id) {
       console.log('getFestivalEvents', id);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id
@@ -129,7 +111,6 @@ angular.module('festivalsWebApp')
     this.deleteFestivalEvent = function deleteFestivalEvent(id, eventId) {
       console.log('deleteFestivalEvent', id, eventId);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id,
@@ -142,7 +123,6 @@ angular.module('festivalsWebApp')
     this.updateFestivalsEvent = function updateFestivalsEvent(id, eventId, data) {
       console.log('updateFestivalsEvent', id, eventId, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         id: id,
@@ -156,7 +136,6 @@ angular.module('festivalsWebApp')
     this.createFestivalsEvent = function createFestivalsEvent(id, data) {
       console.log('createFestivalsEvent', id, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         id: id,
@@ -169,7 +148,6 @@ angular.module('festivalsWebApp')
     this.getFestivalPlaces = function getFestivalPlaces(id) {
       console.log('getFestivalPlaces', id);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id
@@ -181,7 +159,6 @@ angular.module('festivalsWebApp')
     this.deleteFestivalPlace = function deleteFestivalPlace(id, eventId) {
       console.log('deleteFestivalPlace', id, eventId);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id,
@@ -194,7 +171,6 @@ angular.module('festivalsWebApp')
     this.updateFestivalPlace = function updateFestivalPlace(id, eventId, data) {
       console.log('updateFestivalPlace', id, eventId, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         id: id,
@@ -208,7 +184,6 @@ angular.module('festivalsWebApp')
     this.createFestivalPlace = function createFestivalPlace(id, data) {
       console.log('createFestivalPlace', id, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         id: id,
@@ -221,7 +196,6 @@ angular.module('festivalsWebApp')
     this.getFestivalCategories = function getFestivalCategories(id) {
       console.log('getFestivalCategories', id);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id
@@ -233,7 +207,6 @@ angular.module('festivalsWebApp')
     this.deleteFestivalCategory = function deleteFestivalCategory(id, eventId) {
       console.log('deleteFestivalCategory', id, eventId);
 
-      setUpToken(AccessToken);
 
       var query = {
         id: id,
@@ -246,7 +219,6 @@ angular.module('festivalsWebApp')
     this.updateFestivalCategory = function updateFestivalCategory(id, eventId, data) {
       console.log('updateFestivalCategory', id, eventId, data);
 
-      setUpToken(AccessToken);
 
       var params = {
         id: id,
@@ -259,7 +231,7 @@ angular.module('festivalsWebApp')
 
     this.createFestivalCategory = function createFestivalCategory(id, data) {
       console.log('createFestivalCategory', id, data);
-      setUpToken(AccessToken);
+
 
       var params = {
         id: id,

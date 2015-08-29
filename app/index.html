@@ -52,7 +52,7 @@
               template="views/login.html"
               site="https://desolate-temple-8751.herokuapp.com"
               client-id="festivals-web-client"
-              redirect-uri="https://festivals-tech-web.herokuapp.com"
+              redirect-uri="http://localhost:9000"
               profile-uri="https://desolate-temple-8751.herokuapp.com/userinfo"
               state="state"
               scope="">
@@ -62,7 +62,8 @@
     </div>
 
     <div class="container">
-    <div ng-view=""></div>
+      <div loading-status-message style="display:none;">Loading...</div>
+      <div ng-view=""></div>
     </div>
 
     <div class="footer">
@@ -127,6 +128,9 @@
         <script src="scripts/filters/eventsfilter.js"></script>
         <script src="scripts/filters/offset.js"></script>
         <script src="scripts/directives/datetimepicker.js"></script>
+        <script src="scripts/services/oauthinterceptor.js"></script>
+        <script src="scripts/directives/loadingstatusmessage.js"></script>
+        <script src="scripts/services/loadingstatusinterceptor.js"></script>
         <!-- endbuild -->
 </body>
 </html>

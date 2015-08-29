@@ -41,16 +41,27 @@ angular
       .useSanitizeValueStrategy('escape')
       .useMissingTranslationHandlerLog();
   }])
-  //.constant('oauthConstant', {
-  //  oauth: {
-  //    url: 'https://desolate-temple-8751.herokuapp.com',
-  //    clientName: 'festivals-web-client',
-  //    redirect: 'https://festivals-tech-web.herokuapp.com',
-  //    profileUrl: 'https://desolate-temple-8751.herokuapp.com/userinfo'
-  //  }
-  //})
+  .constant('oauthConstant', {
+      url: 'https://desolate-temple-8751.herokuapp.com',
+      clientName: 'festivals-web-client',
+      redirectUri: 'http://localhost:9000',
+      //redirectUri: 'https://festivals-tech-web.herokuapp.com',
+      profileUrl: 'https://desolate-temple-8751.herokuapp.com/userinfo'
+  })
   .value('apiUrl', 'https://festivals.tech/api')
   //.value('apiUrl', 'http://localhost:3000/api')
+  .config(['$httpProvider', function ($httpProvider) {
+
+    //$http.defaults.headers.common.Authorization = 'Basic YmVlcDpib29w'
+
+    //$httpProvider.defaults.headers.post =
+    $httpProvider.defaults.headers.common = {
+      Accept: 'application/vnd.festivals.v1+json'
+    };
+
+    // intercept for oauth tokens
+    $httpProvider.interceptors.push('oauthInterceptor', 'loadingStatusInterceptor');
+  }])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -111,6 +122,9 @@ angular
       .when('/token_type=:type&access_token=:accessToken', {
         template: '',
         controller: function ($location, AccessToken) {
+
+          console.log('$location', $location);
+
           var hash = $location.path().substr(1);
           AccessToken.setTokenFromString(hash);
           $location.path('/');
