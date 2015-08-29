@@ -17,6 +17,7 @@ angular
     'ngSanitize',
     'xeditable',
     'ui.bootstrap',
+    'darthwade.dwLoading',
     'ngTagsInput',
     'pascalprecht.translate',
     'oauth'
@@ -24,6 +25,12 @@ angular
   .run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     //editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
+  })
+  .run(function ($loading) {
+    $loading.setDefaultOptions({
+      active: true,
+      text: 'Please wait...'
+    });
   })
   .config(['$translateProvider', function ($translateProvider) {
     $translateProvider
@@ -42,11 +49,11 @@ angular
       .useMissingTranslationHandlerLog();
   }])
   .constant('oauthConstant', {
-      url: 'https://desolate-temple-8751.herokuapp.com',
-      clientName: 'festivals-web-client',
-      redirectUri: 'http://localhost:9000',
-      //redirectUri: 'https://festivals-tech-web.herokuapp.com',
-      profileUrl: 'https://desolate-temple-8751.herokuapp.com/userinfo'
+    url: 'https://desolate-temple-8751.herokuapp.com',
+    clientName: 'festivals-web-client',
+    redirectUri: 'http://localhost:9000',
+    //redirectUri: 'https://festivals-tech-web.herokuapp.com',
+    profileUrl: 'https://desolate-temple-8751.herokuapp.com/userinfo'
   })
   .value('apiUrl', 'https://festivals.tech/api')
   //.value('apiUrl', 'http://localhost:3000/api')

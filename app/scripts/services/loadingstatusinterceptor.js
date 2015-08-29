@@ -8,18 +8,18 @@
  * Factory in the festivalsWebApp.
  */
 angular.module('festivalsWebApp')
-  .factory('loadingStatusInterceptor', function ($q, $rootScope) {
+  .factory('loadingStatusInterceptor', function ($q, $rootScope, $loading) {
     var activeRequests = 0;
     var started = function () {
       if (activeRequests == 0) {
-        $rootScope.$broadcast('loadingStatusActive');
+        $loading.start('data');
       }
       activeRequests++;
     };
     var ended = function () {
       activeRequests--;
       if (activeRequests == 0) {
-        $rootScope.$broadcast('loadingStatusInactive');
+        $loading.finish('data');
       }
     };
     return {
