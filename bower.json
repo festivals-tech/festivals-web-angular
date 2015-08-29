@@ -33,6 +33,18 @@
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
       ]
+    },
+    "angular-loading": {
+      "main": [
+        "angular-loading.css",
+        "angular-loading.min.js"
+      ]
+    },
+    "angular-dialog-service": {
+      "main": [
+        "dist/dialogs.min.css",
+        "dist/dialogs.min.js"
+      ]
     }
   },
   "resolutions": {
