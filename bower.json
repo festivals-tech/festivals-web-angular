@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "^1.4.5",
     "angular-bootstrap": "~0.13.3",
+    "angular-dialog-service": "~5.2.8",
     "angular-loading": "~0.1.4",
     "angular-messages": "^1.4.5",
     "angular-resource": "^1.4.5",
@@ -35,6 +36,7 @@
     }
   },
   "resolutions": {
-    "angular": "^1.4.5"
+    "angular": "^1.4.5",
+    "angular-bootstrap": "~0.13.3"
   }
 }

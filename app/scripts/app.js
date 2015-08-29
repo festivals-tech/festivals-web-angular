@@ -17,9 +17,10 @@ angular
     'ngSanitize',
     'xeditable',
     'ui.bootstrap',
+    'pascalprecht.translate',
+    'dialogs.main',
     'darthwade.dwLoading',
     'ngTagsInput',
-    'pascalprecht.translate',
     'oauth'
   ])
   .run(function (editableOptions) {

@@ -54,5 +54,19 @@
   "Parent place": "Sala nadrzędna",
   "Sort by published at": "Sortuj po dacie publikacji",
   "Filters": "Filtry",
-  "Please wait...": "Trwa ładowanie danych"
+  "Please wait...": "Trwa ładowanie danych",
+  "DIALOGS_ERROR": "Błąd",
+  "DIALOGS_ERROR_MSG": "Wystąpił nieznany błąd.",
+  "DIALOGS_CLOSE": "Zamknij",
+  "DIALOGS_PLEASE_WAIT": "Trwa ładowanie danych",
+  "DIALOGS_PLEASE_WAIT_ELIPS": "Trwa ładowanie danych...",
+  "DIALOGS_PLEASE_WAIT_MSG": "Oczekiwanie na zakończenie operacji.",
+  "DIALOGS_PERCENT_COMPLETE": "% Ukończone",
+  "DIALOGS_NOTIFICATION": "Informacja",
+  "DIALOGS_NOTIFICATION_MSG": "Nieznana informacja.",
+  "DIALOGS_CONFIRMATION": "Potwierdzenie",
+  "DIALOGS_CONFIRMATION_MSG": "Wymagane potwierdzenie.",
+  "DIALOGS_OK": "OK",
+  "DIALOGS_YES": "Tak",
+  "DIALOGS_NO": "Nie"
 }
