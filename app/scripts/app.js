@@ -51,9 +51,9 @@ angular
   }])
   .constant('oauthConstant', {
     url: 'https://desolate-temple-8751.herokuapp.com',
-    clientName: 'festivals-web-client',
-    redirectUri: 'http://localhost:9000',
-    //redirectUri: 'https://festivals-tech-web.herokuapp.com',
+    clientName: 'festivals-admin',
+    //redirectUri: 'http://localhost:9000',
+    redirectUri: 'https://festivals-tech-web.herokuapp.com',
     profileUrl: 'https://desolate-temple-8751.herokuapp.com/userinfo'
   })
   .value('apiUrl', 'https://festivals.tech/api')
