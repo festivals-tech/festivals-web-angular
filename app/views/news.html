@@ -159,7 +159,7 @@
     <tbody>
 
     <tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.news | newsFilter:search | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
+        ng-repeat="elem in ctrl.collection.news | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
       <td>
         <!--<editable-text-row elem="elem.name" elem-name="name" required></editable-text-row>-->
 
