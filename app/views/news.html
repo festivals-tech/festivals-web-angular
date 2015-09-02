@@ -159,7 +159,7 @@
     <tbody>
 
     <tr ng-show="ctrl.collection.total"
-        ng-repeat="elem in ctrl.collection.news | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
+        ng-repeat="elem in ctrl.collection.news | newsFilter:search | orderBy:sortType:sortReverse | offset: search.offset | limitTo: search.limit">
       <td>
         <!--<editable-text-row elem="elem.name" elem-name="name" required></editable-text-row>-->
 
@@ -239,7 +239,35 @@
                 >{{elem.authors[0].organization || 'unknown' }}</a>
           </div>
         </div>
+        <div class="row">
+          <label class="col-md-3">{{ 'Published at' | translate }}</label>
 
+          <div class="col-md-9">
+            <a href="#"
+               e-required
+               editable-bsdate="elem.publishedAt"
+               e-init-date="11-11-2015"
+               onbeforesave="ctrl.update(elem.id, 'publishedAt', $data)"
+               onshow="openPicker()"
+               onhide="closePicker()"
+               e-format="dd-MM-yyyy"
+               e-is-open="picker.opened"
+               e-current-text="{{ 'Today' | translate }}"
+               e-clear-text="{{ 'Clear' | translate }}"
+               e-close-text="{{ 'Done' | translate }}"
+               e-datepicker-popup="dd-MM-yyyy"
+                >{{ (elem.publishedAt | date:"dd-MM-yyyy") || 'unknown' }}</a>
+            <span>{{ 'time' | translate }}</span>
+            <a href="#"
+               e-required
+               editable-bstime="elem.publishedAt"
+               e-mousewheel="false"
+               e-show-meridian="false"
+               onbeforesave="ctrl.update(elem.id, 'publishedAt', $data)"
+               e-minute-step="10"
+                >{{ (elem.publishedAt | date:"HH:mm") || 'empty' }}</a>
+          </div>
+        </div>
         <div class="row">
           <label class="col-md-3">Image</label>
 
@@ -377,6 +405,33 @@
                   e-required
                   e-placeholder="news location organization"
                 >{{ news.authors[0].organization || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">{{ 'Published at date' | translate }}</label>
+            <span class="col-md-8"
+                  editable-bsdate="news.publishedAt"
+                  e-init-date="11-11-2015"
+                  e-name="publishedAt.date"
+                  e-required
+                  e-datepicker-popup="dd-MM-yyyy"
+                  datepicker-append-to-body=true
+                  e-current-text="{{ 'Today' | translate }}"
+                  e-clear-text="{{ 'Clear' | translate }}"
+                  e-close-text="{{ 'Done' | translate }}"
+                >{{ (news.publishedAt | date:"dd-MM-yyyy") || 'unknown' }}</span>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">{{ 'Published at time' | translate }}</label>
+            <span class="col-md-8"
+                  editable-bstime="news.publishedAt"
+                  e-mousewheel="false"
+                  e-name="publishedAt.time"
+                  e-required
+                  e-show-meridian="false"
+                  e-minute-step="10"
+                >{{ (news.publishedAt | date:"HH:mm") || 'unknown' }}</span>
         </div>
 
         <div class="form-group row">

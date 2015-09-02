@@ -26,7 +26,7 @@ angular.module('festivalsWebApp')
     this.collection = collection;
 
     this.statuses = ['', 'CREATED', 'PUBLISHED', 'CANCELED'];
-    this.types = ['', 'FANTASY', 'MUSIC', 'WOODSTOCK'];
+    this.types = ['', 'FANTASY', 'MUSIC'];
     this.countries = ['PL'];
 
     function setProp(path, newValue) {

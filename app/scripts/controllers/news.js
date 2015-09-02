@@ -11,6 +11,19 @@ angular.module('festivalsWebApp')
   .controller('NewsCtrl', function ($scope, $timeout, collection, api) {
     var self = this;
 
+    $scope.picker = {opened: false, format: 'dd-MM-yyyy'};
+    $scope.enabledHours = true;
+
+    $scope.openPicker = function () {
+      $timeout(function () {
+        $scope.picker.opened = true;
+      });
+    };
+
+    $scope.closePicker = function () {
+      $scope.picker.opened = false;
+    };
+
     this.collection = collection || [];
     this.statuses = ['', 'CREATED', 'PUBLISHED', 'CANCELED'];
 
@@ -25,6 +38,9 @@ angular.module('festivalsWebApp')
           return holder;
         case 'description':
           holder.description = newValue;
+          return holder;
+        case 'publishedAt':
+          holder.publishedAt = newValue;
           return holder;
         case 'authors[0].name':
           holder.authors = [{name: newValue}];
@@ -102,7 +118,8 @@ angular.module('festivalsWebApp')
       ],
       mainImage: {
         large: ''
-      }
+      },
+      publishedAt: ''
     };
 
     $scope.news = $scope.news || $scope.emptyNews;
@@ -112,7 +129,7 @@ angular.module('festivalsWebApp')
 
       var data = angular.copy($scope.news);
 
-      if (data.hasOwnProperty('tags')) {
+      if (data.hasOwnProperty('tags') && data.tags) {
         console.log('tag for ' + data);
 
         var tags = data.tags.map(function (tag) {
@@ -122,7 +139,7 @@ angular.module('festivalsWebApp')
         data.tags = tags;
       }
 
-      if (data.hasOwnProperty('mainImage')) {
+      if (data.hasOwnProperty('mainImage') && data.mainImage && data.mainImage.large) {
         var image = {
           url: data.mainImage.large
         };
@@ -130,9 +147,8 @@ angular.module('festivalsWebApp')
         data.images = [
           image
         ];
-
-        delete data.mainImage;
       }
+      delete data.mainImage;
 
       //console.log('data', data);
 
@@ -172,56 +188,56 @@ angular.module('festivalsWebApp')
 
     //sorting
 
-    self.sortReverse = true;
-    self.sortType = 'publishedAt';
+    $scope.sortReverse = true;
+    $scope.sortType = 'publishedAt';
 
     this.toggleSort = function toggleSort(type) {
-      self.sortType = type;
-      self.sortReverse = !self.sortReverse;
+      $scope.sortType = type;
+      $scope.sortReverse = !$scope.sortReverse;
     };
 
     this.isSortAsc = function isSortAsc(type) {
-      if (type === self.sortType) {
-        return self.sortReverse;
+      if (type === $scope.sortType) {
+        return $scope.sortReverse;
       }
       return false;
     };
 
     this.isSortDesc = function isSortDesc(type) {
-      if (type === self.sortType) {
-        return !self.sortReverse;
+      if (type === $scope.sortType) {
+        return !$scope.sortReverse;
       }
       return false;
     };
 
     //pagination
-    self.currentPage = 0;
-    self.search = {};
-    self.search.offset = 0;
-    self.search.limit = 10;
+    $scope.currentPage = 0;
+    $scope.search = {};
+    $scope.search.offset = 0;
+    $scope.search.limit = 10;
 
     this.prevPage = function () {
-      if (self.currentPage > 0) {
-        self.currentPage--;
-        this.setPage(self.currentPage);
+      if ($scope.currentPage > 0) {
+        $scope.currentPage--;
+        this.setPage($scope.currentPage);
       }
     };
 
     this.setPage = function (page) {
-      self.currentPage = page;
-      self.search.offset = self.currentPage * self.search.limit;
+      $scope.currentPage = page;
+      $scope.search.offset = $scope.currentPage * $scope.search.limit;
     };
 
     this.prevPageDisabled = function () {
-      return self.currentPage === 0 ? "disabled" : "";
+      return $scope.currentPage === 0 ? "disabled" : "";
     };
 
     this.pageCount = function () {
-      if (!self.search.limit) {
+      if (!$scope.search.limit) {
         return 0;
       }
 
-      return Math.ceil(self.collection.news.length / self.search.limit) - 1;
+      return Math.ceil(self.collection.news.length / $scope.search.limit) - 1;
     };
 
     this.range = function () {
@@ -235,14 +251,14 @@ angular.module('festivalsWebApp')
     };
 
     this.nextPage = function () {
-      if (self.currentPage < this.pageCount()) {
-        self.currentPage++;
-        this.setPage(self.currentPage);
+      if ($scope.currentPage < this.pageCount()) {
+        $scope.currentPage++;
+        this.setPage($scope.currentPage);
       }
     };
 
     this.nextPageDisabled = function () {
-      return self.currentPage === this.pageCount() ? "disabled" : "";
+      return $scope.currentPage === this.pageCount() ? "disabled" : "";
     };
 
   });
