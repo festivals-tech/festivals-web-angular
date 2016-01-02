@@ -11,12 +11,13 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+  var serveStatic = require('serve-static');
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
-    ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    ngtemplates: 'grunt-angular-templates'
+    //cdnify: 'grunt-google-cdn'
   });
 
   // Configurable paths for the application
@@ -80,18 +81,33 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
+              serveStatic('.tmp'),
+              //connect().use('/bower_components', serveStatic('./bower_components')),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                serveStatic('./bower_components')
               ),
               connect().use(
                 '/app/styles',
-                connect.static('./app/styles')
+                serveStatic('./app/styles')
               ),
-              connect.static(appConfig.app)
+              serveStatic(appConfig.app)
             ];
           }
+          //middleware: function (connect) {
+          //  return [
+          //    connect.static('.tmp'),
+          //    connect().use(
+          //      '/bower_components',
+          //      connect.static('./bower_components')
+          //    ),
+          //    connect().use(
+          //      '/app/styles',
+          //      connect.static('./app/styles')
+          //    ),
+          //    connect.static(appConfig.app)
+          //  ];
+          //}
         }
       },
       test: {
@@ -343,11 +359,11 @@ module.exports = function (grunt) {
     },
 
     // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
+    //cdnify: {
+    //  dist: {
+    //    html: ['<%= yeoman.dist %>/*.html']
+    //  }
+    //},
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -454,9 +470,9 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
+    //'cdnify',
+    //'cssmin',
+    //'uglify',
     'filerev',
     'usemin',
     'htmlmin'

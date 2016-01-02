@@ -466,13 +466,11 @@
           <a href="#/festivals/{{elem.id}}/categories">
             <button class="btn btn-ok">{{ 'categories' | translate }}</button>
           </a>
-          <!--
           <button class="btn btn-danger"
                   ng-show="elem.id"
                   ng-click="ctrl.remove(elem.id)"
               >{{ 'remove' | translate }}
           </button>
-          -->
           <button class="btn btn-danger"
                   ng-show="elem.id"
                   ng-click="ctrl.duplicate(elem.id);editableForm.$show()"
