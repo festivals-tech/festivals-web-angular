@@ -174,11 +174,12 @@ angular.module('festivalsWebApp')
         var news = el[0];
         console.log('duplicate news');
         console.log(news);
-      }
 
-      delete news.id;
-      delete news['$$hashKey'];
-      $scope.news = angular.copy(news);
+
+        delete news.id;
+        delete news.$$hashKey;
+        $scope.news = angular.copy(news);
+      }
     };
 
     this.reset = function () {

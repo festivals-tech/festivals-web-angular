@@ -22,7 +22,7 @@ angular.module('festivalsWebApp')
       search.updatedAtTo = search.updatedAtTo || '';
 
       var result = [];
-      angular.forEach(items, function (object, key) {
+      angular.forEach(items, function (object/*, key*/) {
 
         var valid = true;
 
@@ -31,13 +31,14 @@ angular.module('festivalsWebApp')
             if (!object.name || object.name.indexOfInsensitive(search.name) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.description:
             if (!object.description || object.description.indexOfInsensitive(search.description) === -1) {
               valid = false;
             }
         }
 
-        angular.forEach(object.authors, function (author, key2) {
+        angular.forEach(object.authors, function (author/*, key2*/) {
           //console.log('second: ', location, key2);
 
           switch (true) {
@@ -47,6 +48,7 @@ angular.module('festivalsWebApp')
               if (!author.name || author.name.indexOfInsensitive(search.author_name) === -1) {
                 valid = false;
               }
+            /* falls through */
             case !!search.author_organization:
               if (!author.organization || author.organization.indexOfInsensitive(search.author_organization) === -1) {
                 valid = false;

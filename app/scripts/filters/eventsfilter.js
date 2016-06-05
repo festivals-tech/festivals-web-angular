@@ -28,7 +28,7 @@ angular.module('festivalsWebApp')
       search.updatedAtTo = search.updatedAtTo || '';
 
       var result = [];
-      angular.forEach(items, function (object, key) {
+      angular.forEach(items, function (object/*, key*/) {
 
         var valid = true;
 
@@ -37,14 +37,17 @@ angular.module('festivalsWebApp')
             if (!object.id || object.id.indexOfInsensitive(search.id) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.name:
             if (!object.name || object.name.indexOfInsensitive(search.name) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.description:
             if (!object.description || object.description.indexOfInsensitive(search.description) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.tag:
 
             var matchingTags = object.tags.filter(function (tag) {
@@ -56,17 +59,19 @@ angular.module('festivalsWebApp')
             });
 
             valid = valid && matchingTags.length > 0;
+          /* falls through */
           case !!search.place_name:
             if (!object.place || !object.place.name || object.place.name.indexOfInsensitive(search.place_name) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.category_name:
             if (!object.category || !object.category.name || object.category.name.indexOfInsensitive(search.category_name) === -1) {
               valid = false;
             }
         }
 
-        angular.forEach(object.authors, function (author, key2) {
+        angular.forEach(object.authors, function (author/*, key2*/) {
           //console.log('second: ', location, key2);
 
           switch (true) {
@@ -76,6 +81,7 @@ angular.module('festivalsWebApp')
               if (!author.name || author.name.indexOfInsensitive(search.author_name) === -1) {
                 valid = false;
               }
+            /* falls through */
             case !!search.author_organization:
               if (!author.organization || author.organization.indexOfInsensitive(search.author_organization) === -1) {
                 valid = false;

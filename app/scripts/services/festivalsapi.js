@@ -1,4 +1,5 @@
-'use strict';
+/*jshint -W069 */
+/*jshint unused:false*/
 
 /**
  * @ngdoc service
@@ -33,7 +34,7 @@ angular.module('festivalsWebApp')
       }
 
       FestivalsApi.prototype.$on = function ($scope, path, handler) {
-        var url = domain + path;
+        var url = this.domain + path;
         $scope.$on(url, function () {
           handler();
         });
@@ -41,7 +42,7 @@ angular.module('festivalsWebApp')
       };
 
       FestivalsApi.prototype.$broadcast = function (path) {
-        var url = domain + path;
+        var url = this.domain + path;
         //cache.remove(url);
         $rootScope.$broadcast(url);
         return this;
@@ -52,9 +53,11 @@ angular.module('festivalsWebApp')
         for (var p in obj) {
           var val = obj[p];
           if (angular.isArray(val)) {
+            /*jshint -W083 */
             val.forEach(function (val) {
               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(val));
             });
+            /*jshint +W083 */
           } else {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(val));
           }
@@ -2928,3 +2931,6 @@ angular.module('festivalsWebApp')
 
     return FestivalsApi;
   }]);
+
+/*jshint +W069 */
+/*jshint unused:true*/

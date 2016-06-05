@@ -147,11 +147,10 @@ angular.module('festivalsWebApp')
         var category = el[0];
         console.log('duplicate category');
         console.log(category);
+        delete category.id;
+        delete category.$$hashKey;
+        $scope.category = angular.copy(category);
       }
-
-      delete category.id;
-      delete category['$$hashKey'];
-      $scope.category = angular.copy(category);
     };
 
     this.reset = function () {

@@ -4,7 +4,7 @@ String.prototype.indexOfInsensitive = function (s, b) {
   return this.toLowerCase().indexOf(s.toLowerCase(), b);
 };
 
-var checkDateRange = function checkDateRange(date, from, to) {
+var checkDateRange = function checkDateRange(date, from, to) { // jshint ignore:line
   var valid = true;
   var momentFrom = null;
   var momentTo = null;

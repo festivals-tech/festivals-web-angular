@@ -20,7 +20,7 @@ angular.module('festivalsWebApp')
       search.updatedAtTo = search.updatedAtTo || '';
 
       var result = [];
-      angular.forEach(items, function (object, key) {
+      angular.forEach(items, function (object/*, key*/) {
 
         var valid = true;
 
@@ -29,6 +29,7 @@ angular.module('festivalsWebApp')
             if (!object.parent_id || object.parent_id.indexOfInsensitive(search.parent_id) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.name:
             if (!object.name || object.name.indexOfInsensitive(search.name) === -1) {
               valid = false;

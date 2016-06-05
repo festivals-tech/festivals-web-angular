@@ -28,7 +28,7 @@ angular.module('festivalsWebApp')
       search.updatedAtTo = search.updatedAtTo || '';
 
       var result = [];
-      angular.forEach(items, function (object, key) {
+      angular.forEach(items, function (object/*, key*/) {
 
         var valid = true;
 
@@ -37,14 +37,17 @@ angular.module('festivalsWebApp')
             if (object.name.indexOfInsensitive(search.name) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.description:
             if (object.description.indexOfInsensitive(search.description) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.type:
             if (object.type.indexOfInsensitive(search.type) === -1) {
               valid = false;
             }
+          /* falls through */
           case !!search.tag:
 
             var matchingTags = object.tags.filter(function (tag) {
@@ -58,7 +61,7 @@ angular.module('festivalsWebApp')
             valid = valid && matchingTags.length > 0;
         }
 
-        angular.forEach(object.locations, function (location, key2) {
+        angular.forEach(object.locations, function (location/*, key2*/) {
           //console.log('second: ', location, key2);
 
           switch (true) {
@@ -66,14 +69,17 @@ angular.module('festivalsWebApp')
               if (location.country && location.country.indexOfInsensitive(search.location_country) === -1) {
                 valid = false;
               }
+            /* falls through */
             case !!search.location_name:
               if (location.name && location.name.indexOfInsensitive(search.location_name) === -1) {
                 valid = false;
               }
+            /* falls through */
             case !!search.location_city:
               if (location.city && location.city.indexOfInsensitive(search.location_city) === -1) {
                 valid = false;
               }
+            /* falls through */
             case !!search.location_state:
               if (location.state && location.state.indexOfInsensitive(search.location_state) === -1) {
                 valid = false;

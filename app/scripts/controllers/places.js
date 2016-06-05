@@ -196,11 +196,12 @@ angular.module('festivalsWebApp')
         var place = el[0];
         console.log('duplicate place');
         console.log(place);
-      }
 
-      delete place.id;
-      delete place['$$hashKey'];
-      $scope.place = angular.copy(place);
+
+        delete place.id;
+        delete place.$$hashKey;
+        $scope.place = angular.copy(place);
+      }
     };
 
     this.reset = function () {

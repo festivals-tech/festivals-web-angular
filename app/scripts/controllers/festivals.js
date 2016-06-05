@@ -219,11 +219,11 @@ angular.module('festivalsWebApp')
         var festival = el[0];
         console.log('duplicate festival');
         console.log(festival);
-      }
 
-      delete festival.id;
-      delete festival['$$hashKey'];
-      $scope.festival = angular.copy(festival);
+        delete festival.id;
+        delete festival.$$hashKey;
+        $scope.festival = angular.copy(festival);
+      }
     };
 
     this.reset = function () {

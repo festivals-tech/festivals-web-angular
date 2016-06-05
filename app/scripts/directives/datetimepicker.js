@@ -11,7 +11,7 @@ angular.module('festivalsWebApp')
     return {
       link: function ($scope, element, $attrs) {
         return $timeout(function () {
-          var ngModelGetter = $parse($attrs['ngModel']);
+          var ngModelGetter = $parse($attrs.ngModel);
 
           return $(element).datetimepicker(
             {

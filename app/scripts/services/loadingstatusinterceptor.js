@@ -11,14 +11,14 @@ angular.module('festivalsWebApp')
   .factory('loadingStatusInterceptor', function ($q, $rootScope, $loading) {
     var activeRequests = 0;
     var started = function () {
-      if (activeRequests == 0) {
+      if (activeRequests === 0) {
         $loading.start('data');
       }
       activeRequests++;
     };
     var ended = function () {
       activeRequests--;
-      if (activeRequests == 0) {
+      if (activeRequests === 0) {
         $loading.finish('data');
       }
     };
