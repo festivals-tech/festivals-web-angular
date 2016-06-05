@@ -8,8 +8,8 @@
  * Factory in the festivalsWebApp.
  */
 angular.module('festivalsWebApp')
-  .factory('oauthInterceptor', ['$q', '$injector', '$location', '$rootScope', 'oauthConstant', 'AccessToken', 'Endpoint',
-    function ($q, $injector, $location, $rootScope, oauthConstant, AccessToken, Endpoint) {
+  .factory('oauthInterceptor', ['$q', '$injector', '$location', '$rootScope', 'oauthConstant', 'AccessToken',
+    function ($q, $injector, $location, $rootScope, oauthConstant, AccessToken) {
       var oauthInterceptor = {
 
         request: function (config) {
@@ -38,6 +38,7 @@ angular.module('festivalsWebApp')
         },
 
         responseError: function (response) {
+          var Endpoint = $injector.get('Endpoint');
 
           if (response.status === 401 && response.data.code && response.data.code === 'UnauthorizedError') {
             //var redirectUri = oauthConstant.redirectUri + '/#' + $location.url();
